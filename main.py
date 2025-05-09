@@ -3,6 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
 
+
+from get_llm_response import get_answer
+
 app = FastAPI()
 
 # CORS Settings
@@ -28,7 +31,7 @@ class AnswerResponse(BaseModel):
 def answer_question(question: QuestionRequest):
     user_question = question.question
     # You can add logic here to generate answers
-    answer = "Here is your answer: "
+    answer = get_answer(user_question)
     return {"answer": answer}
 
 # Only run if executed directly
